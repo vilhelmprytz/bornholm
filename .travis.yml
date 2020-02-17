@@ -8,10 +8,12 @@ install:
     - tar zxpf luarocks-3.3.0.tar.gz
     - cd luarocks-3.3.0
     - ./configure && make && sudo make install
+    - cd ..
+    - rm -rf luarocks-3.3.0
     - luarocks install luacheck
 script:
-    - luarocks *.lua
-    - zip -9 -r bornholm.love .
+    - luacheck *.lua
+    - zip -qq -9 -r bornholm.love .
 
 deploy:
     provider: releases
