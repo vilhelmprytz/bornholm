@@ -6,3 +6,12 @@ install:
     - luarocks install luacheck
 script:
     - luarocks *.lua
+    - zip -9 -r bornholm.love .
+
+deploy:
+    provider: releases
+    api_key: "GITHUB OAUTH TOKEN"
+    file: "bornholm*.love"
+    skip_cleanup: true
+    on:
+        tags: true
