@@ -12,7 +12,7 @@ install:
     - rm -rf luarocks-3.3.0
     - sudo luarocks install luacheck
 script:
-    - luacheck *.lua
+    # - luacheck *.lua
     - zip -qq -9 -r bornholm.love .
 
 deploy:
