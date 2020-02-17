@@ -10,7 +10,7 @@ install:
     - ./configure && make && sudo make install
     - cd ..
     - rm -rf luarocks-3.3.0
-    - luarocks install luacheck
+    - sudo luarocks install luacheck
 script:
     - luacheck *.lua
     - zip -qq -9 -r bornholm.love .
