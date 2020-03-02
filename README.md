@@ -1,10 +1,12 @@
 # operation-bornholm
 
+[![Build Status](https://travis-ci.com/operation-bornholm/bornholm.svg?branch=master)](https://travis-ci.com/operation-bornholm/bornholm)
+
 The Operation Bornholm game.
 
 ## Requirements
 
-* [LOVE2D](https://love2d.org)
+* [LOVE2D](https://love2d.org) (version 11.3)
 * `love` command in your path
 
 ## Running locally
@@ -17,10 +19,11 @@ love .
 
 ## Structure
 
-* `main.lua` - main LOVE2D file
-* `assets` - images, sprites, sound etc.
-* `lib/engine` - functions meant to be run in `love.update`, engine and mathematical functions
-* `lib/graphics` - functions meant to be run in `love.draw`, graphics and drawing functions
+* `src/main.lua` - main LOVE2D file
+* `src/tiles` - textures for tiles
+* `src/maps` - map data structures
+* `src/graphics` - graphical functionalities
+* `src/engine` - mathematical engine functionalities
 
 ## Contributors
 

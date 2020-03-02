@@ -4,7 +4,7 @@
 
 -- see all settings here https://love2d.org/wiki/Config_Files
 
-require "version"
+require "src/version"
 
 function love.conf(t)
     t.version = "11.3"
