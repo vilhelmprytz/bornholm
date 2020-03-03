@@ -5,9 +5,13 @@
 ---
 --- https://github.com/operation-bornholm/bornholm
 
+number_of_tiles = 2
 
-require "src/version"
+function load_tiles()
+    tiles = {}
+    for i=1, number_of_tiles, 1 do
+        tiles[i] = love.graphics.newImage("src/tiles/" .. tostring(i) .. ".png")
+    end
 
-function draw_version()
-    love.graphics.print("Bornholm " .. version, 10, 25)
+    return tiles
 end

@@ -6,8 +6,7 @@
 --- https://github.com/operation-bornholm/bornholm
 
 
-require "src/version"
-
-function draw_version()
-    love.graphics.print("Bornholm " .. version, 10, 25)
+function draw_coordinates()
+    love.graphics.print("player.x " .. player.x, 10, 40)
+    love.graphics.print("player.y " .. player.y, 10, 55)
 end

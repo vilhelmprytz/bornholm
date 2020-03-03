@@ -1,36 +1,62 @@
 --- Operation Bornholm
+----
+--- Copyright (C) 2020, Vilhelm Prytz <vilhelm@prytznet.se>, Pontus Liedgren <pop2strong4u@gmail.com>, et. al.
+--- This game is licensed under the terms of the GNU GPL v3.0 license, see LICENSE
+---
 --- https://github.com/operation-bornholm/bornholm
---- (C) Copyright Vilhelm Prytz & Pontus Liedgren 2020
 
 require "src/graphics/draw_fps"
 require "src/graphics/draw_version"
+require "src/graphics/draw_map"
+require "src/graphics/draw_coordinates"
+
+require "src/load_tiles"
 
 require "src/version"
 
+--- load map
+require "src/maps/bornholm"
+
+-- objects
+require "src/player"
+
 game = {}
-game.state = "menu"
+game.state = "ingame"
+
+game.map = {}
+game.map.name = "Bornholm"
+game.map.raw = MAP
+
 
 function love.load()
     print("Running Bornholm version " .. version)
+
+    tiles = load_tiles()
+
+    -- initiate
+    player:load()
+
+    -- physics
+    world = love.physics.newWorld(0, 9.82, true)
 end
 
 -- draw
 function love.draw()
-    -- always display FPS and version
-    draw_fps()
-    draw_version()
-
     if game.state == "menu" then
         -- draw_menu()
     end
 
     if game.state == "ingame" then
-        -- draw_map()
+        draw_map()
+        player:draw()
         -- draw_player()
         -- draw_bullets()
     end
 
-    love.graphics.print("Hello World", 400, 300)
+    -- always display FPS and version
+    draw_fps()
+    draw_version()
+    draw_coordinates()
 end
 
 dtotal = 0   -- this keeps track of how much time has passed
@@ -40,6 +66,23 @@ function love.update(dt)
         dtotal = dtotal - 1   -- reduce our timer by a second, but don't discard the change... what if our framerate is 2/3 of a second?
         -- yeet
     end
+
+    if love.keyboard.isDown('d') then
+        player.x = player.x + (100 * dt)
+    end
+    if love.keyboard.isDown('a') then
+        player.x = player.x - (100 * dt)
+    end
+
+    if love.keyboard.isDown('w') then
+        player.y = player.y - (100 * dt)
+    end
+    if love.keyboard.isDown('s') then
+        player.y = player.y + (100 * dt)
+    end
+
+    print(player.x)
+    print(player.y)
 end
 
 -- keypressed
