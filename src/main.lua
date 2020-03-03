@@ -68,21 +68,18 @@ function love.update(dt)
     end
 
     if love.keyboard.isDown('d') then
-        player.x = player.x + (100 * dt)
+        player.x = player.x + (800 * dt)
     end
     if love.keyboard.isDown('a') then
-        player.x = player.x - (100 * dt)
+        player.x = player.x - (800 * dt)
     end
 
     if love.keyboard.isDown('w') then
-        player.y = player.y - (100 * dt)
+        player.y = player.y - (800 * dt)
     end
     if love.keyboard.isDown('s') then
-        player.y = player.y + (100 * dt)
+        player.y = player.y + (800 * dt)
     end
-
-    print(player.x)
-    print(player.y)
 end
 
 -- keypressed
