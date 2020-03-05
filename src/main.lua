@@ -72,17 +72,15 @@ function love.update(dt)
     if love.keyboard.isDown('d') then
         player.body:setPosition(player.body:getX()+800*dt, player.body:getY())
     end
-    -- if love.keyboard.isDown('a') then
-    --     player.x = player.x - (800 * dt)
-    -- end  
-
-    -- if love.keyboard.isDown('w') then
-    --     player.y = player.y - (800 * dt)
-    -- end
-    -- if love.keyboard.isDown('s') then
-    --     player.y = player.y + (800 * dt)
-    -- end
-
+    if love.keyboard.isDown('a') then
+        player.body:setPosition(player.body:getX()-800*dt, player.body:getY())
+    end
+    if love.keyboard.isDown('s') then
+        player.body:setPosition(player.body:getX(), player.body:getY()+800*dt)
+    end
+    if love.keyboard.isDown('w') then
+        player.body:setPosition(player.body:getX(), player.body:getY()-800*dt)
+    end
 end
 
 -- keypressed
