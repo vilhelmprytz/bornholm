@@ -5,8 +5,4 @@
 ---
 --- https://github.com/operation-bornholm/bornholm
 
-
-function draw_coordinates()
-    love.graphics.print("player.x " .. player.x, 10, 40)
-    love.graphics.print("player.y " .. player.y, 10, 55)
-end
+bullets = {}

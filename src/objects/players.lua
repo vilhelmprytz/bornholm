@@ -5,9 +5,4 @@
 ---
 --- https://github.com/operation-bornholm/bornholm
 
-
-require "src/version"
-
-function draw_version()
-    love.graphics.print("Bornholm " .. version, 10, 25)
-end
+players = {}

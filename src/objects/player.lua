@@ -6,12 +6,13 @@
 --- https://github.com/operation-bornholm/bornholm
 
 player = {}
+player.width = 32
+player.height = 48
 
 function player:load()
-    player.x = 0
-    player.y = 0
-    player.height = 32
-    player.width = 16
+    player.shape = love.physics.newRectangleShape(player.width, player.height)
+    player.body = love.physics.newBody( world, 0, 0, "static")
+    player.fixture = love.physics.newFixture( player.body, player.shape, 1 )
 end
 
 function player:draw()

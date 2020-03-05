@@ -5,20 +5,21 @@
 ---
 --- https://github.com/operation-bornholm/bornholm
 
-require "src/graphics/draw_fps"
-require "src/graphics/draw_version"
-require "src/graphics/draw_map"
-require "src/graphics/draw_coordinates"
-
+-- basic
 require "src/load_tiles"
-
 require "src/version"
 
 --- load map
 require "src/maps/bornholm"
 
 -- objects
-require "src/player"
+require "src/objects/player"
+
+-- map
+require "src/map"
+
+-- ui
+require "src/ui/hud"
 
 game = {}
 game.state = "ingame"
@@ -31,55 +32,57 @@ game.map.raw = MAP
 function love.load()
     print("Running Bornholm version " .. version)
 
+    -- load the PNG files
     tiles = load_tiles()
 
-    -- initiate
+    -- initiate physics engine
+    world = love.physics.newWorld(0, 9.82, true)
+
+    -- initiate player
     player:load()
 
-    -- physics
-    world = love.physics.newWorld(0, 9.82, true)
+    -- initiate map
+    map:load()
 end
 
 -- draw
 function love.draw()
     if game.state == "menu" then
-        -- draw_menu()
+        -- menu:draw()
     end
 
     if game.state == "ingame" then
-        draw_map()
+        map:draw()
         player:draw()
-        -- draw_player()
-        -- draw_bullets()
     end
 
     -- always display FPS and version
-    draw_fps()
-    draw_version()
-    draw_coordinates()
+    hud:draw()
 end
 
-dtotal = 0   -- this keeps track of how much time has passed
+-- dtotal = 0   -- this keeps track of how much time has passed
 function love.update(dt)
-    dtotal = dtotal + dt   -- we add the time passed since the last update, probably a very small number like 0.01
-    if dtotal >= 1 then
-        dtotal = dtotal - 1   -- reduce our timer by a second, but don't discard the change... what if our framerate is 2/3 of a second?
-        -- yeet
-    end
+    world:update(dt)
+    -- dtotal = dtotal + dt   -- we add the time passed since the last update, probably a very small number like 0.01
+    -- if dtotal >= 1 then
+    --     dtotal = dtotal - 1   -- reduce our timer by a second, but don't discard the change... what if our framerate is 2/3 of a second?
+    --     -- yeet
+    -- end
 
     if love.keyboard.isDown('d') then
-        player.x = player.x + (800 * dt)
+        player.body:setPosition(player.body:getX()+800*dt, player.body:getY())
     end
-    if love.keyboard.isDown('a') then
-        player.x = player.x - (800 * dt)
-    end
+    -- if love.keyboard.isDown('a') then
+    --     player.x = player.x - (800 * dt)
+    -- end  
 
-    if love.keyboard.isDown('w') then
-        player.y = player.y - (800 * dt)
-    end
-    if love.keyboard.isDown('s') then
-        player.y = player.y + (800 * dt)
-    end
+    -- if love.keyboard.isDown('w') then
+    --     player.y = player.y - (800 * dt)
+    -- end
+    -- if love.keyboard.isDown('s') then
+    --     player.y = player.y + (800 * dt)
+    -- end
+
 end
 
 -- keypressed
