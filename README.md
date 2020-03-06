@@ -19,11 +19,11 @@ love .
 
 ## Structure
 
+To be documented (this is constantly changing during development)!
+
 * `src/main.lua` - main LOVE2D file
 * `src/tiles` - textures for tiles
 * `src/maps` - map data structures
-* `src/graphics` - graphical functionalities
-* `src/engine` - mathematical engine functionalities
 
 ## Contributors
 
