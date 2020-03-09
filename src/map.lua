@@ -21,6 +21,8 @@ function map:load()
                 object.body = love.physics.newBody( world, block_size*(cell-1), block_size*(row-1), "static")
                 object.fixture = love.physics.newFixture( object.body, object.shape, 1 )
 
+                object.static_x = block_size*(cell-1)
+                object.static_y = block_size*(row-1)
                 object.id = value
 
                 table.insert(map, object)
@@ -29,8 +31,17 @@ function map:load()
     end
 end
 
+function map:update()
+    for i,tile in ipairs(map) do
+        tile.body:setPosition(tile.static_x - player.body:getX(), tile.static_y - player.body:getY())
+    end
+end
+
+
 function map:draw()
     for i,object in ipairs(map) do
-        love.graphics.draw(tiles[object.id], object.body:getX()-player.body:getX(), object.body:getY()-player.body:getY())
+         -- love.graphics.draw(tiles[object.id], object.body:getX()-player.body:getX(), object.body:getY()-player.body:getY())
+         -- Love.graphics.translate(dx, dy)
+        love.graphics.draw(tiles[object.id], object.body:getX(), object.body:getY())
     end
 end

@@ -8,10 +8,11 @@
 player = {}
 player.width = 32
 player.height = 48
+player.force_speed = 2
 
 function player:load()
     player.shape = love.physics.newRectangleShape(player.width, player.height)
-    player.body = love.physics.newBody( world, 0, 0, "static")
+    player.body = love.physics.newBody( world, 0, 0, "dynamic")
     player.fixture = love.physics.newFixture( player.body, player.shape, 1 )
 end
 

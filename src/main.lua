@@ -62,6 +62,7 @@ end
 
 -- dtotal = 0   -- this keeps track of how much time has passed
 function love.update(dt)
+    map:update()
     world:update(dt)
     -- dtotal = dtotal + dt   -- we add the time passed since the last update, probably a very small number like 0.01
     -- if dtotal >= 1 then
@@ -70,16 +71,16 @@ function love.update(dt)
     -- end
 
     if love.keyboard.isDown('d') then
-        player.body:setPosition(player.body:getX()+800*dt, player.body:getY())
+        player.body:applyLinearImpulse(player.force_speed, 0)
     end
     if love.keyboard.isDown('a') then
-        player.body:setPosition(player.body:getX()-800*dt, player.body:getY())
-    end
-    if love.keyboard.isDown('s') then
-        player.body:setPosition(player.body:getX(), player.body:getY()+800*dt)
+        player.body:applyLinearImpulse(-player.force_speed, 0)
     end
     if love.keyboard.isDown('w') then
-        player.body:setPosition(player.body:getX(), player.body:getY()-800*dt)
+        player.body:applyLinearImpulse(0, -player.force_speed)
+    end
+    if love.keyboard.isDown('s') then
+        player.body:applyLinearImpulse(0, player.force_speed)
     end
 end
 

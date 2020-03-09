@@ -15,4 +15,5 @@ function hud:draw()
 
     love.graphics.print("player.x " .. player.body:getX(), 10, 40)
     love.graphics.print("player.y " .. player.body:getY(), 10, 55)
+    love.graphics.print("player.velocity " .. player.body:getLinearVelocity(), 10, 70)
 end
