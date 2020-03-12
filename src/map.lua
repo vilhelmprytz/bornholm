@@ -19,13 +19,13 @@ function map:load()
             -- special case for id 0
             if value ~= 0 then
                 object = {}
-
-                object.shape = love.physics.newRectangleShape( block_size, block_size )
-                object.body = love.physics.newBody( world, block_size*(cell-1), block_size*(row-1), "static")
-                object.fixture = love.physics.newFixture( object.body, object.shape, 1 )
-
                 object.static_x = block_size*(cell-1)
                 object.static_y = block_size*(row-1)
+
+                object.shape = love.physics.newRectangleShape( block_size, block_size )
+                object.body = love.physics.newBody( world, object.static_x, object.static_y, "static")
+                object.fixture = love.physics.newFixture( object.body, object.shape, 1 )
+
                 object.id = value
 
                 table.insert(map, object)
