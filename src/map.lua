@@ -11,6 +11,9 @@ local block_size = 64
 map = {}
 
 function map:load()
+    -- initiate background
+    backgroundImage = love.graphics.newImage("src/background/bg1.png")
+
     for row, value in pairs(game.map.raw) do
         for cell, value in pairs(value) do
             -- special case for id 0
@@ -39,6 +42,10 @@ end
 
 
 function map:draw()
+    local sx = love.graphics.getWidth() / backgroundImage:getWidth()
+    local sy = love.graphics.getHeight() / backgroundImage:getHeight()
+    love.graphics.draw(backgroundImage, 0, 0, 0, sx, sy ) -- x:0, y:0, rot: 0, scale x and scale y
+
     for i,object in ipairs(map) do
          -- love.graphics.draw(tiles[object.id], object.body:getX()-player.body:getX(), object.body:getY()-player.body:getY())
          -- Love.graphics.translate(dx, dy)

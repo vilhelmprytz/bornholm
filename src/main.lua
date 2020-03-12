@@ -43,9 +43,6 @@ function love.load()
 
     -- initiate map
     map:load()
-
-    -- initiate background
-    backgroundImage = love.graphics.newImage("src/background/bakgrund-1.png")
 end
 
 -- draw
@@ -55,9 +52,6 @@ function love.draw()
     end
 
     if game.state == "ingame" then
-        local sx = love.graphics.getWidth() / backgroundImage:getWidth()
-        local sy = love.graphics.getHeight() / backgroundImage:getHeight()
-        love.graphics.draw(backgroundImage, 0, 0, 0, sx, sy ) -- x:0, y:0, rot: 0, scale x and scale y
         map:draw()
         player:draw()
     end
