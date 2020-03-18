@@ -19,12 +19,12 @@ function map:load()
             -- special case for id 0
             if value ~= 0 then
                 object = {}
-                object.static_x = block_size*(cell-1)
-                object.static_y = block_size*(row-1)
+                object.x = block_size*(cell-1)
+                object.y = block_size*(row-1)
 
-                object.shape = love.physics.newRectangleShape( block_size, block_size )
-                object.body = love.physics.newBody( world, object.static_x, object.static_y, "static")
-                object.fixture = love.physics.newFixture( object.body, object.shape, 1 )
+                -- object.shape = love.physics.newRectangleShape( block_size, block_size )
+                -- object.body = love.physics.newBody( world, object.static_x, object.static_y, "static")
+                -- object.fixture = love.physics.newFixture( object.body, object.shape, 1 )
 
                 object.id = value
 
@@ -35,9 +35,9 @@ function map:load()
 end
 
 function map:update()
-    for i,tile in ipairs(map) do
-        tile.body:setPosition(tile.static_x - player.body:getX(), tile.static_y - player.body:getY())
-    end
+    -- for i,tile in ipairs(map) do
+    --     tile.body:setPosition(tile.static_x - player.body:getX(), tile.static_y - player.body:getY())
+    -- end
 end
 
 
@@ -46,9 +46,11 @@ function map:draw()
     local sy = love.graphics.getHeight() / backgroundImage:getHeight()
     love.graphics.draw(backgroundImage, 0, 0, 0, sx, sy ) -- x:0, y:0, rot: 0, scale x and scale y
 
+    -- love.graphics.translate(player.x, player.y)
     for i,object in ipairs(map) do
-         -- love.graphics.draw(tiles[object.id], object.body:getX()-player.body:getX(), object.body:getY()-player.body:getY())
-         -- Love.graphics.translate(dx, dy)
-        love.graphics.draw(tiles[object.id], object.body:getX(), object.body:getY())
+        -- love.graphics.draw(tiles[object.id], object.body:getX()-player.body:getX(), object.body:getY()-player.body:getY())
+        -- love.graphics.translate(dx, dy)
+        love.graphics.draw(tiles[object.id], object.x+player.x, object.y+player.y)
     end
+    -- love.graphics.translate(0, 0)
 end

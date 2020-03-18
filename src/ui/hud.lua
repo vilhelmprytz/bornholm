@@ -13,7 +13,8 @@ function hud:draw()
     love.graphics.print("Bornholm " .. version, 10, 25)
     love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
-    love.graphics.print("player.x " .. player.body:getX(), 10, 40)
-    love.graphics.print("player.y " .. player.body:getY(), 10, 55)
-    love.graphics.print("player.velocity " .. player.body:getLinearVelocity(), 10, 70)
+    love.graphics.print("player.x " .. player.x, 10, 40)
+    love.graphics.print("player.y " .. player.y, 10, 55)
+    love.graphics.print("player.horizontal_velocity " .. player.horizontal_velocity, 10, 70)
+    love.graphics.print("player.vertical_velocity " .. player.vertical_velocity, 10, 85)
 end

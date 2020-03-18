@@ -35,9 +35,6 @@ function love.load()
     -- load the PNG files
     tiles = load_tiles()
 
-    -- initiate physics engine
-    world = love.physics.newWorld(0, 9.82, true)
-
     -- initiate player
     player:load()
 
@@ -63,25 +60,14 @@ end
 -- dtotal = 0   -- this keeps track of how much time has passed
 function love.update(dt)
     map:update()
-    world:update(dt)
+    player:update(dt)
     -- dtotal = dtotal + dt   -- we add the time passed since the last update, probably a very small number like 0.01
     -- if dtotal >= 1 then
     --     dtotal = dtotal - 1   -- reduce our timer by a second, but don't discard the change... what if our framerate is 2/3 of a second?
     --     -- yeet
     -- end
 
-    if love.keyboard.isDown('d') then
-        player.body:applyLinearImpulse(player.force_speed, 0)
-    end
-    if love.keyboard.isDown('a') then
-        player.body:applyLinearImpulse(-player.force_speed, 0)
-    end
-    if love.keyboard.isDown('w') then
-        player.body:applyLinearImpulse(0, -player.force_speed)
-    end
-    if love.keyboard.isDown('s') then
-        player.body:applyLinearImpulse(0, player.force_speed)
-    end
+
 end
 
 -- keypressed
