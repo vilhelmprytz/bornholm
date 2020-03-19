@@ -6,9 +6,8 @@
 --- https://github.com/operation-bornholm/bornholm
 
 
-local block_size = 64
-
 map = {}
+map.block_size = 64
 
 function map:load()
     -- initiate background
@@ -19,8 +18,8 @@ function map:load()
             -- special case for id 0
             if value ~= 0 then
                 object = {}
-                object.x = block_size*(cell-1)
-                object.y = block_size*(row-1)
+                object.x = map.block_size*(cell-1)
+                object.y = map.block_size*(row-1)
 
                 -- object.shape = love.physics.newRectangleShape( block_size, block_size )
                 -- object.body = love.physics.newBody( world, object.static_x, object.static_y, "static")
@@ -50,7 +49,10 @@ function map:draw()
     for i,object in ipairs(map) do
         -- love.graphics.draw(tiles[object.id], object.body:getX()-player.body:getX(), object.body:getY()-player.body:getY())
         -- love.graphics.translate(dx, dy)
-        love.graphics.draw(tiles[object.id], object.x+player.x, object.y+player.y)
+        love.graphics.draw(tiles[object.id], object.x, object.y)
     end
-    -- love.graphics.translate(0, 0)
+    
+    for i, tiles in ipairs(map) do
+        love.graphics.rectangle("line", tiles.x, tiles.y, map.block_size, map.block_size)
+    end
 end
