@@ -41,17 +41,17 @@ function player:update(dt)
 
     -- player steering
     if love.keyboard.isDown('a') then
-        player.horizontal_velocity = player.running_speed
-    elseif love.keyboard.isDown('d') then
         player.horizontal_velocity = -player.running_speed
+    elseif love.keyboard.isDown('d') then
+        player.horizontal_velocity = player.running_speed
     else
         player.horizontal_velocity = 0
     end
 
     if love.keyboard.isDown('w') then
-        player.vertical_velocity = player.running_speed
-    elseif love.keyboard.isDown('s') then
         player.vertical_velocity = -player.running_speed
+    elseif love.keyboard.isDown('s') then
+        player.vertical_velocity = player.running_speed
     else
         player.vertical_velocity = 0
     end
@@ -60,7 +60,6 @@ end
 function player:draw()
     love.graphics.setColor(255, 0, 0)
     love.graphics.rectangle("fill", ((love.graphics.getWidth()/2) - (player.width/2)), ((love.graphics.getHeight()/2) - (player.height/2)), player.width, player.height)
-    love.graphics.rectangle("line", player.x, player.y, player.width, player.height)
+    -- love.graphics.rectangle("line", player.x, player.y, player.width, player.height)
     love.graphics.setColor(255, 255, 255)
-
 end

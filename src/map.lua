@@ -41,18 +41,20 @@ end
 
 
 function map:draw()
-    local sx = love.graphics.getWidth() / backgroundImage:getWidth()
-    local sy = love.graphics.getHeight() / backgroundImage:getHeight()
+    local screen_width = love.graphics.getWidth()
+    local screen_height = love.graphics.getHeight()
+    local sx = screen_width / backgroundImage:getWidth()
+    local sy = screen_height / backgroundImage:getHeight()
     love.graphics.draw(backgroundImage, 0, 0, 0, sx, sy ) -- x:0, y:0, rot: 0, scale x and scale y
 
     -- love.graphics.translate(player.x, player.y)
-    for i,object in ipairs(map) do
-        -- love.graphics.draw(tiles[object.id], object.body:getX()-player.body:getX(), object.body:getY()-player.body:getY())
-        -- love.graphics.translate(dx, dy)
-        love.graphics.draw(tiles[object.id], object.x, object.y)
+    for i,tile in ipairs(map) do
+        local x = tile.x - (player.x - screen_width/2 + player.width/2)
+        local y = tile.y - (player.y - screen_height/2 + player.height/2)
+        love.graphics.draw(tiles[tile.id], x, y)
     end
     
-    for i, tiles in ipairs(map) do
-        love.graphics.rectangle("line", tiles.x, tiles.y, map.block_size, map.block_size)
-    end
+    -- for i, tiles in ipairs(map) do
+    --     love.graphics.rectangle("line", tiles.x, tiles.y, map.block_size, map.block_size)
+    -- end
 end
