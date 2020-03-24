@@ -17,5 +17,4 @@ function hud:draw()
     love.graphics.print("player.y " .. player.y, 10, 55)
     love.graphics.print("player.horizontal_velocity " .. player.horizontal_velocity, 10, 70)
     love.graphics.print("player.vertical_velocity " .. player.vertical_velocity, 10, 85)
-    love.graphics.print("player.collision_direction " .. tostring(player.collision_direction), 10, 100)
 end

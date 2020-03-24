@@ -21,26 +21,20 @@ function player:load()
     player.x = 200
     player.y = 200
 
-    player.collision_direction = nil
+    player.collision_direction = {}
 end
 
 function player:update(dt)
-    local has_collided = false
-
     for i,tile in ipairs(map) do
         if tile.id ~= 0 then
             if CheckCollision(player.x,player.y,player.width,player.height, tile.x,tile.y,map.block_size,map.block_size) then
                 _direction = AvailableDirections(player.x,player.y,player.width,player.height, tile.x,tile.y,map.block_size,map.block_size)
                 if (_direction) then
-                    has_collided = true
-                    player.collision_direction = _direction
+                    table.insert(player.collision_direction, _direction)
+                    -- player.collision_direction = _direction
                 end
             end
         end
-    end
-
-    if (has_collided == false) then
-        player.collision_direction = nil
     end
 
     -- if not player.has_collided then
@@ -48,15 +42,25 @@ function player:update(dt)
     player.y = player.y+player.vertical_velocity*dt
     -- end
 
+    local function has_value (tab, val)
+        for index, value in ipairs(tab) do
+            if value == val then
+                return true
+            end
+        end
+    
+        return false
+    end
+
     -- player steering
     if love.keyboard.isDown('a') then
-        if (player.collision_direction ~= "left") then
+        if not (has_value(player.collision_direction, "left")) then
             player.horizontal_velocity = -player.running_speed
         else
             player.horizontal_velocity = 0
         end
     elseif love.keyboard.isDown('d') then
-        if (player.collision_direction ~= "right") then
+        if not (has_value(player.collision_direction, "right")) then
             player.horizontal_velocity = player.running_speed
         else
             player.horizontal_velocity = 0
@@ -66,20 +70,24 @@ function player:update(dt)
     end
 
     if love.keyboard.isDown('w') then
-        if (player.collision_direction ~= "up") then
+        if not (has_value(player.collision_direction, "up")) then
             player.vertical_velocity = -player.running_speed
         else
-            player.horizontal_velocity = 0
+            player.vertical_velocity = 0
         end
     elseif love.keyboard.isDown('s') then
-        if (player.collision_direction ~= "down") then
+        if not (has_value(player.collision_direction, "down")) then
             player.vertical_velocity = player.running_speed
         else
             player.vertical_velocity = 0
         end
     else
         player.vertical_velocity = 0
-    end    
+    end 
+
+    for k in pairs (player.collision_direction) do
+        player.collision_direction [k] = nil
+    end
 end
 
 function player:draw()
@@ -87,4 +95,13 @@ function player:draw()
     love.graphics.rectangle("fill", ((love.graphics.getWidth()/2) - (player.width/2)), ((love.graphics.getHeight()/2) - (player.height/2)), player.width, player.height)
     -- love.graphics.rectangle("line", player.x, player.y, player.width, player.height)
     love.graphics.setColor(255, 255, 255)
+
+    -- local w1 = player.width
+    -- local h1 = player.height
+    -- local temp_x = ((love.graphics.getWidth()/2) - (player.width/2))
+    -- local temp_y = ((love.graphics.getHeight()/2) - (player.height/2))
+
+    -- love.graphics.rectangle("line", temp_x+(w1-1), temp_y+1, 1, h1-2)
+    -- love.graphics.rectangle("line", temp_x+1, temp_y, w1-2, 1)
+
 end
