@@ -64,7 +64,7 @@ function player:update(dt)
             player.horizontal_velocity = player.running_speed
         else
             player.horizontal_velocity = 0
-        end 
+        end
     else
         player.horizontal_velocity = 0
     end
@@ -103,5 +103,4 @@ function player:draw()
 
     -- love.graphics.rectangle("line", temp_x+(w1-1), temp_y+1, 1, h1-2)
     -- love.graphics.rectangle("line", temp_x+1, temp_y, w1-2, 1)
-
 end
