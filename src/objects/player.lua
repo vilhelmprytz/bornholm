@@ -16,7 +16,7 @@ function player:load()
     player.running_speed = 250
     player.horizontal_velocity = 0  
     player.vertical_velocity = 0
-    player.acceleration = 5
+    player.acceleration = 50
 
     player.x = 200
     player.y = 200
@@ -69,21 +69,39 @@ function player:update(dt)
         player.horizontal_velocity = 0
     end
 
-    if love.keyboard.isDown('w') then
-        if not (has_value(player.collision_direction, "up")) then
-            player.vertical_velocity = -player.running_speed
-        else
-            player.vertical_velocity = 0
-        end
-    elseif love.keyboard.isDown('s') then
-        if not (has_value(player.collision_direction, "down")) then
-            player.vertical_velocity = player.running_speed
-        else
-            player.vertical_velocity = 0
-        end
+    -- if love.keyboard.isDown('w') then
+    --     if not (has_value(player.collision_direction, "up")) then
+    --         player.vertical_velocity = -player.running_speed
+    --     else
+    --         player.vertical_velocity = 0
+    --     end
+    -- elseif love.keyboard.isDown('s') then
+    --     if not (has_value(player.collision_direction, "down")) then
+    --         player.vertical_velocity = player.running_speed
+    --     else
+    --         player.vertical_velocity = 0
+    --     end
+    -- else
+    --     player.vertical_velocity = 0
+    -- end 
+
+    -- gravitation
+    if not (has_value(player.collision_direction, "down")) then
+        player.vertical_velocity = player.vertical_velocity+player.acceleration*dt
     else
         player.vertical_velocity = 0
-    end 
+    end
+
+    -- jump
+    if love.keyboard.isDown('space') then 
+        if not(has_value(player.collision_direction, "up")) then
+            player.vertical_velocity = 0
+            player.vertical_velocity = player.vertical_velocity-player.acceleration*dt 
+            if (player.y - object.y == 300) then
+                player.vertical_velocity = player.vertical_velocity+player.acceleration*dt
+            end
+        end
+    end
 
     for k in pairs (player.collision_direction) do
         player.collision_direction [k] = nil
