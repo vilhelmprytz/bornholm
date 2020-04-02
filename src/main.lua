@@ -14,7 +14,7 @@ require "src/maps/bornholm"
 
 -- objects
 require "src/objects/player"
-
+-- require "src/objects/bullets"
 -- map
 require "src/map"
 
@@ -38,6 +38,8 @@ function love.load()
     -- initiate player
     player:load()
 
+    -- initiate bullets
+    -- bullets:load()
     -- initiate map
     map:load()
 end
@@ -51,6 +53,7 @@ function love.draw()
     if game.state == "ingame" then
         map:draw()
         player:draw()
+        --bullets:draw()
     end
 
     -- always display FPS and version
