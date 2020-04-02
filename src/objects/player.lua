@@ -72,8 +72,6 @@ function player:update(dt)
 
     if not (has_value(player.collision_direction, "down")) then
         player.vertical_velocity = player.vertical_velocity+player.acceleration*dt
-    else
-        player.vertical_velocity = 0
     end
 
     -- gravitation & jump
@@ -81,6 +79,15 @@ function player:update(dt)
         if not(has_value(player.collision_direction, "up")) and has_value(player.collision_direction, "down") then
             player.vertical_velocity = player.jump_velocity
         end
+    end
+
+    -- stop player movement if colliding up or down
+    if has_value(player.collision_direction, "up") and player.vertical_velocity < 0 then
+        player.vertical_velocity = 0
+    end
+
+    if has_value(player.collision_direction, "down") and player.vertical_velocity > 0 then
+        player.vertical_velocity = 0
     end
 
     for k in pairs (player.collision_direction) do
