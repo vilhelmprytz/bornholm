@@ -16,10 +16,11 @@ function player:load()
     player.running_speed = 250
     player.horizontal_velocity = 0  
     player.vertical_velocity = 0
-    player.acceleration = 50
+    player.acceleration = 100
+    player.jump_velocity = -250
 
-    player.x = 200
-    player.y = 200
+    player.x = 500
+    player.y = 500
 
     player.collision_direction = {}
 end
@@ -69,37 +70,16 @@ function player:update(dt)
         player.horizontal_velocity = 0
     end
 
-    -- if love.keyboard.isDown('w') then
-    --     if not (has_value(player.collision_direction, "up")) then
-    --         player.vertical_velocity = -player.running_speed
-    --     else
-    --         player.vertical_velocity = 0
-    --     end
-    -- elseif love.keyboard.isDown('s') then
-    --     if not (has_value(player.collision_direction, "down")) then
-    --         player.vertical_velocity = player.running_speed
-    --     else
-    --         player.vertical_velocity = 0
-    --     end
-    -- else
-    --     player.vertical_velocity = 0
-    -- end 
-
-    -- gravitation
     if not (has_value(player.collision_direction, "down")) then
         player.vertical_velocity = player.vertical_velocity+player.acceleration*dt
     else
         player.vertical_velocity = 0
     end
 
-    -- jump
-    if love.keyboard.isDown('space') then 
-        if not(has_value(player.collision_direction, "up")) then
-            player.vertical_velocity = 0
-            player.vertical_velocity = player.vertical_velocity-player.acceleration*dt 
-            if (player.y - object.y == 300) then
-                player.vertical_velocity = player.vertical_velocity+player.acceleration*dt
-            end
+    -- gravitation & jump
+    if love.keyboard.isDown('space') then
+        if not(has_value(player.collision_direction, "up")) and has_value(player.collision_direction, "down") then
+            player.vertical_velocity = player.jump_velocity
         end
     end
 
