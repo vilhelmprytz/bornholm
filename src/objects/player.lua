@@ -25,22 +25,48 @@ function player:load()
     player.collision_direction = {}
 end
 
-function player:update(dt)
+function player:physics_check()
     for i,tile in ipairs(map) do
         if tile.id ~= 0 then
             if CheckCollision(player.x,player.y,player.width,player.height, tile.x,tile.y,map.block_size,map.block_size) then
-                _direction = AvailableDirections(player.x,player.y,player.width,player.height, tile.x,tile.y,map.block_size,map.block_size)
-                if (_direction) then
-                    table.insert(player.collision_direction, _direction)
-                    -- player.collision_direction = _direction
-                end
+                return AvailableDirections(player.x,player.y,player.width,player.height, tile.x,tile.y,map.block_size,map.block_size)
             end
         end
     end
 
+    return nil
+end
+
+function player:update(dt)
+    local direction = player.physics_check()
+    if (direction) then
+        table.insert(player.collision_direction, direction)
+    end
+
+    -- what we want to move the player to
+    new_x = player.x+player.horizontal_velocity*dt
+    new_y = player.y+player.vertical_velocity*dt
+
+    -- check that no blocks exist between the player and the new coords
+    if player.vertical_velocity < 0 then
+        while player.y > new_y do
+            player.y = player.y - 1
+            if player.physics_check() then
+                new_y = player.y
+            end
+        end
+    elseif player.vertical_velocity > 0 then
+        while player.y < new_y do
+            player.y = player.y + 1
+            if player.physics_check() then
+                new_y = player.y
+            end
+        end 
+    end
+
     -- if not player.has_collided then
-    player.x = player.x+player.horizontal_velocity*dt
-    player.y = player.y+player.vertical_velocity*dt
+    player.x = new_x
+    player.y = new_y
     -- end
 
     local function has_value (tab, val)
