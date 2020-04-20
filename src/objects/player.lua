@@ -48,21 +48,41 @@ function player:update(dt)
     new_y = player.y+player.vertical_velocity*dt
 
     -- check that no blocks exist between the player and the new coords
-    if player.vertical_velocity < 0 then
-        while player.y > new_y do
-            player.y = player.y - 1
-            if player.physics_check() then
-                new_y = player.y
-            end
-        end
-    elseif player.vertical_velocity > 0 then
-        while player.y < new_y do
-            player.y = player.y + 1
-            if player.physics_check() then
-                new_y = player.y
-            end
-        end 
-    end
+    -- if player.vertical_velocity < 0 then
+    --     while player.y > new_y do
+    --         if player.physics_check() then
+    --             new_y = player.y
+    --         else
+    --             player.y = player.y - 1
+    --         end
+    --     end
+    -- elseif player.vertical_velocity > 0 then
+    --     while player.y < new_y do
+    --         if player.physics_check() then
+    --             new_y = player.y
+    --         else
+    --             player.y = player.y + 1
+    --         end
+    --     end 
+    -- end
+
+    -- if player.horizontal_velocity < 0 then
+    --     while player.x > new_x do
+    --         if player.physics_check() then
+    --             new_x = player.x
+    --         else
+    --             player.x = player.x - 1
+    --         end
+    --     end
+    -- elseif player.horizontal_velocity > 0 then
+    --     while player.x < new_x do
+    --         if player.physics_check() then
+    --             new_x = player.x
+    --         else
+    --             player.x = player.x + 1
+    --         end
+    --     end 
+    -- end
 
     -- if not player.has_collided then
     player.x = new_x
