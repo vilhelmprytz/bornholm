@@ -13,25 +13,48 @@ function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
 end
 
 function AvailableDirections(x1,y1,w1,h1, x2,y2,w2,h2)
+    local directions = {}
+
     -- left
-    if (CheckCollision(x1, y1+1, 1, h1-2, x2,y2,w2,h2)) then
-        return "left"
+    if (CheckCollision(x1-1,y1,w1,h1, x2,y2,w2,h2)) then
+        table.insert(directions, "left")
     end
-    
+
     -- right
-    if (CheckCollision(x1+(w1-1), y1+1, 1, h1-2, x2,y2,w2,h2)) then
-        return "right"
+    if (CheckCollision(x1+1,y1,w1,h1, x2,y2,w2,h2)) then
+        table.insert(directions, "right")
     end
 
     -- up
-    if (CheckCollision(x1+1, y1, w1-2, 1, x2,y2,w2,h2)) then
-        return "up"
-    end
-    
-    -- down
-    if(CheckCollision(x1+1, y1+(h1-1), w1-2, 1, x2,y2,w2,h2)) then
-        return "down"
+    if (CheckCollision(x1,y1-1,w1,h1, x2,y2,w2,h2)) then
+        table.insert(directions, "up")
     end
 
-    return false
+    -- down
+    if(CheckCollision(x1,y1+1,w1,h1, x2,y2,w2,h2)) then
+        table.insert(directions, "down")
+    end
+
+    return directions
 end
+
+
+-- -- left
+-- if (CheckCollision(x1, y1+1, 1, h1-2, x2,y2,w2,h2)) then
+--     table.insert(directions, "left")
+-- end
+
+-- -- right
+-- if (CheckCollision(x1+(w1-1), y1+1, 1, h1-2, x2,y2,w2,h2)) then
+--     table.insert(directions, "right")
+-- end
+
+-- -- up
+-- if (CheckCollision(x1+1, y1, w1-2, 1, x2,y2,w2,h2)) then
+--     table.insert(directions, "up")
+-- end
+
+-- -- down
+-- if(CheckCollision(x1+1, y1+(h1-1), w1-2, 1, x2,y2,w2,h2)) then
+--     table.insert(directions, "down")
+-- end

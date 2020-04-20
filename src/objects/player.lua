@@ -16,8 +16,8 @@ function player:load()
     player.running_speed = 250
     player.horizontal_velocity = 0  
     player.vertical_velocity = 0
-    player.acceleration = 100
-    player.jump_velocity = -250
+    player.acceleration = 200
+    player.jump_velocity = -350
 
     player.x = 500
     player.y = 500
@@ -37,10 +37,20 @@ function player:physics_check()
     return nil
 end
 
+function has_value (tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+
+    return false
+end
+
 function player:update(dt)
     local direction = player.physics_check()
-    if (direction) then
-        table.insert(player.collision_direction, direction)
+    if direction ~= nil then
+        player.collision_direction = direction
     end
 
     -- what we want to move the player to
@@ -48,56 +58,57 @@ function player:update(dt)
     new_y = player.y+player.vertical_velocity*dt
 
     -- check that no blocks exist between the player and the new coords
-    -- if player.vertical_velocity < 0 then
-    --     while player.y > new_y do
-    --         if player.physics_check() then
-    --             new_y = player.y
-    --         else
-    --             player.y = player.y - 1
-    --         end
-    --     end
-    -- elseif player.vertical_velocity > 0 then
-    --     while player.y < new_y do
-    --         if player.physics_check() then
-    --             new_y = player.y
-    --         else
-    --             player.y = player.y + 1
-    --         end
-    --     end 
-    -- end
-
-    -- if player.horizontal_velocity < 0 then
-    --     while player.x > new_x do
-    --         if player.physics_check() then
-    --             new_x = player.x
-    --         else
-    --             player.x = player.x - 1
-    --         end
-    --     end
-    -- elseif player.horizontal_velocity > 0 then
-    --     while player.x < new_x do
-    --         if player.physics_check() then
-    --             new_x = player.x
-    --         else
-    --             player.x = player.x + 1
-    --         end
-    --     end 
-    -- end
+    if player.vertical_velocity < 0 then
+        while player.y > new_y do
+            local direction = player.physics_check()
+            if direction == nil then
+                player.y = player.y - 1
+            elseif has_value(direction, "up") then
+                new_y = player.y
+            else
+                player.y = player.y - 1
+            end
+        end
+    elseif player.vertical_velocity > 0 then
+        while player.y < new_y do
+            local direction = player.physics_check()
+            if direction == nil then
+                player.y = player.y + 1
+            elseif has_value(direction, "down") then
+                new_y = player.y
+            else
+                player.y = player.y + 1
+            end
+        end 
+    end
+    if player.horizontal_velocity < 0 then
+        while player.x > new_x do
+            local direction = player.physics_check()
+            if direction == nil then
+                player.x = player.x - 1
+            elseif has_value(direction, "left") then
+                new_x = player.x
+            else
+                player.x = player.x - 1
+            end
+        end
+    elseif player.horizontal_velocity > 0 then
+        while player.x < new_x do
+            local direction = player.physics_check()
+            if direction == nil then
+                player.x = player.x + 1
+            elseif has_value(direction, "right") then
+                new_x = player.x
+            else
+                player.x = player.x + 1
+            end
+        end 
+    end
 
     -- if not player.has_collided then
     player.x = new_x
     player.y = new_y
     -- end
-
-    local function has_value (tab, val)
-        for index, value in ipairs(tab) do
-            if value == val then
-                return true
-            end
-        end
-    
-        return false
-    end
 
     -- player steering
     if love.keyboard.isDown('a') then
