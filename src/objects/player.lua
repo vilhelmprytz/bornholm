@@ -10,6 +10,7 @@ require "src/lib/physics"
 player = {}
 
 function player:load()
+    player.dead = false
     player.width = 32
     player.height = 48
 
@@ -155,16 +156,7 @@ function player:update(dt)
 end
 
 function player:draw()
-    love.graphics.setColor(255, 0, 0)
+    love.graphics.setColor(0, 153, 0)
     love.graphics.rectangle("fill", ((love.graphics.getWidth()/2) - (player.width/2)), ((love.graphics.getHeight()/2) - (player.height/2)), player.width, player.height)
-    -- love.graphics.rectangle("line", player.x, player.y, player.width, player.height)
     love.graphics.setColor(255, 255, 255)
-
-    -- local w1 = player.width
-    -- local h1 = player.height
-    -- local temp_x = ((love.graphics.getWidth()/2) - (player.width/2))
-    -- local temp_y = ((love.graphics.getHeight()/2) - (player.height/2))
-
-    -- love.graphics.rectangle("line", temp_x+(w1-1), temp_y+1, 1, h1-2)
-    -- love.graphics.rectangle("line", temp_x+1, temp_y, w1-2, 1)
 end

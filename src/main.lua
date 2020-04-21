@@ -15,6 +15,7 @@ require "src/maps/bornholm"
 -- objects
 require "src/objects/player"
 require "src/objects/bullets"
+require "src/objects/enemies"
 
 -- map
 require "src/map"
@@ -45,6 +46,9 @@ function love.load()
     -- initiate bullets
     bullets:load()
 
+    -- initiate enemies
+    enemies:load()
+
     -- set special cursor
     cursor = love.mouse.newCursor("src/cursor/crosshair.png", 0, 0)
     love.mouse.setCursor(cursor)
@@ -60,6 +64,7 @@ function love.draw()
         map:draw()
         player:draw()
         bullets:draw()
+        enemies:draw()
     end
 
     -- always display HUD
@@ -68,9 +73,12 @@ end
 
 function love.update(dt)
     if game.state == "ingame" then
-        map:update()
-        player:update(dt)
-        bullets:update(dt)
+        if player.dead == false then
+            map:update()
+            player:update(dt)
+            bullets:update(dt)
+            enemies:update(dt)
+        end
     end
 end
 

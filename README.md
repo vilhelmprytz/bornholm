@@ -24,6 +24,10 @@ To be documented (this is constantly changing during development)!
 * `src/main.lua` - main LOVE2D file
 * `src/tiles` - textures for tiles
 * `src/maps` - map data structures
+* `src/objects` - methods (objects) for each element of the game
+  * `src/objects/bullets.lua` - handles bullets (collision, draw, create, delete)
+  * `src/objects/enemies.lua` - handles enemies (collision, draw, create, delete)
+  * `src/objects/player.lua` - handles player (collision, draw)
 
 ## Contributors
 
