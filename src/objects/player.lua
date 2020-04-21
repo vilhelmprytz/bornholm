@@ -1,9 +1,9 @@
 --- Operation Bornholm
-----
+---
 --- Copyright (C) 2020, Vilhelm Prytz <vilhelm@prytznet.se>, Pontus Liedgren <pop2strong4u@gmail.com>, et. al.
 --- This game is licensed under the terms of the GNU GPL v3.0 license, see LICENSE
 ---
---- https://github.com/operation-bornholm/bornholm
+--- https://github.com/VilhelmPrytz/bornholm
 
 require "src/lib/physics"
 
@@ -28,7 +28,8 @@ end
 
 function player:physics_check()
     for i,tile in ipairs(map) do
-        if tile.id ~= 0 then
+        -- fixme: should merge into one constant!
+        if tile.id ~= 0 and tile.id ~= 3 then
             if CheckCollision(player.x,player.y,player.width,player.height, tile.x,tile.y,map.block_size,map.block_size) then
                 return AvailableDirections(player.x,player.y,player.width,player.height, tile.x,tile.y,map.block_size,map.block_size)
             end

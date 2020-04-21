@@ -1,9 +1,9 @@
 --- Operation Bornholm
-----
+---
 --- Copyright (C) 2020, Vilhelm Prytz <vilhelm@prytznet.se>, Pontus Liedgren <pop2strong4u@gmail.com>, et. al.
 --- This game is licensed under the terms of the GNU GPL v3.0 license, see LICENSE
 ---
---- https://github.com/operation-bornholm/bornholm
+--- https://github.com/VilhelmPrytz/bornholm
 
 require "src/lib/physics"
 
@@ -34,7 +34,8 @@ function bullets:update(dt)
     for i,bullet in ipairs(bullet_objects) do
         -- check for collision with each tile in map
         for n,tile in ipairs(map) do
-            if tile.id ~= 0 then
+            -- fixme: should merge into one constant!
+            if tile.id ~= 0 and tile.id ~= 3 then
                 if CheckCollision(bullet.x,bullet.y,bullets.width,bullets.height, tile.x,tile.y,map.block_size,map.block_size) then
                     table.remove(bullet_objects, i)
                 end
