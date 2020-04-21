@@ -25,6 +25,7 @@ function player:load()
     player.y = 500
 
     player.collision_direction = {}
+    player.color = { ["green"] = {0, 255, 0}, ["blue"] = {0, 0, 255} } 
 end
 
 function player:physics_check()
@@ -156,7 +157,7 @@ function player:update(dt)
 end
 
 function player:draw()
-    love.graphics.setColor(0, 153, 0)
+    love.graphics.setColor(player.color["blue"])
     love.graphics.rectangle("fill", ((love.graphics.getWidth()/2) - (player.width/2)), ((love.graphics.getHeight()/2) - (player.height/2)), player.width, player.height)
     love.graphics.setColor(255, 255, 255)
 end
