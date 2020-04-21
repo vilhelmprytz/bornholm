@@ -39,9 +39,12 @@ function love.load()
     player:load()
 
     -- initiate bullets
-    -- bullets:load()
     -- initiate map
     map:load()
+    -- cursor
+    --bullets:load()
+    cursor = love.mouse.newCursor("src/cursor/crosshairbornholm.png", 0, 0)
+    love.mouse.setCursor(cursor)
 end
 
 -- draw

@@ -8,19 +8,19 @@ bullets = {}
 
 function bullets:load()
     love.mouse.setVisible(false) -- make default mouse invisible
-    cursor = love.mouse.getCursor()
-    bullets.position = love.mouse.getPosition()
-    -- bullet_img = love.graphics.newImage("mouse.png") -- fix mouse picture
+
+
+
 end
 
 function bullets:update(dt)
-
 end
 
 function bullets:draw()
     
-    love.graphics.setColor(255,255,0)
+    --[[ love.graphics.setColor(255,255,0)
         -- love.graphics.rectangle("line", player.x, player.y, player.width, player.height)
     local x, y = bullets.position
-    love.graphics.draw("fill", x, y)
+    love.graphics.draw("fill", x, y) ]]
+
 end
