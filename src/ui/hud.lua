@@ -27,4 +27,6 @@ function hud:draw()
             love.graphics.print(k .. " " .. v, 10, 100 + 15 * k)
         end
     end
+
+    love.graphics.print("len bullet_objects " .. table.getn(bullet_objects), 10, 180)
 end
