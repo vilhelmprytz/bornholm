@@ -18,6 +18,7 @@ function player:load()
     player.vertical_velocity = 0
     player.acceleration = 200
     player.jump_velocity = -350
+    player.bounce_fraction = 0.3
 
     player.x = 500
     player.y = 500
@@ -140,11 +141,11 @@ function player:update(dt)
 
     -- stop player movement if colliding up or down
     if has_value(player.collision_direction, "up") and player.vertical_velocity < 0 then
-        player.vertical_velocity = 0
+        player.vertical_velocity = -(player.vertical_velocity*player.bounce_fraction)
     end
 
     if has_value(player.collision_direction, "down") and player.vertical_velocity > 0 then
-        player.vertical_velocity = 0
+        player.vertical_velocity = -(player.vertical_velocity*player.bounce_fraction)
     end
 
     for k in pairs (player.collision_direction) do
