@@ -14,7 +14,8 @@ require "src/maps/bornholm"
 
 -- objects
 require "src/objects/player"
--- require "src/objects/bullets"
+require "src/objects/bullets"
+
 -- map
 require "src/map"
 
@@ -42,7 +43,7 @@ function love.load()
     -- initiate map
     map:load()
     -- cursor
-    --bullets:load()
+    bullets:load()
     cursor = love.mouse.newCursor("src/cursor/crosshairbornholm.png", 0, 0)
     love.mouse.setCursor(cursor)
 end
@@ -56,7 +57,7 @@ function love.draw()
     if game.state == "ingame" then
         map:draw()
         player:draw()
-        --bullets:draw()
+        bullets:draw()
     end
 
     -- always display FPS and version
@@ -67,6 +68,7 @@ end
 function love.update(dt)
     map:update()
     player:update(dt)
+    bullets:update(dt)
     -- dtotal = dtotal + dt   -- we add the time passed since the last update, probably a very small number like 0.01
     -- if dtotal >= 1 then
     --     dtotal = dtotal - 1   -- reduce our timer by a second, but don't discard the change... what if our framerate is 2/3 of a second?

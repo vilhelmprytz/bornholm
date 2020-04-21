@@ -7,13 +7,17 @@
 bullets = {}
 
 function bullets:load()
-    love.mouse.setVisible(false) -- make default mouse invisible
-
-
+    bullet_objects = {}
 
 end
 
 function bullets:update(dt)
+    if love.mouse.isDown(1) then
+        local x, y = love.mouse.getPosition()
+
+        print(x .. " " .. y)
+    end
+
 end
 
 function bullets:draw()
