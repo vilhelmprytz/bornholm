@@ -5,7 +5,7 @@
 ---
 --- https://github.com/operation-bornholm/bornholm
 
-number_of_tiles = 2
+number_of_tiles = 3
 
 function load_tiles()
     tiles = {}
