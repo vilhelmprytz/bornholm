@@ -5,4 +5,4 @@
 ---
 --- https://github.com/VilhelmPrytz/bornholm
 
-version = "v0.0.0"
+version = "v0.1.0"
