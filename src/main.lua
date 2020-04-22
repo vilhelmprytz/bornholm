@@ -22,6 +22,7 @@ require "src/map"
 
 -- ui
 require "src/ui/hud"
+require "src/ui/score"
 
 game = {}
 game.state = "ingame"
@@ -49,6 +50,9 @@ function love.load()
     -- initiate enemies
     enemies:load()
 
+    -- initiate score
+    score:load()
+
     -- set special cursor
     cursor = love.mouse.newCursor("src/cursor/crosshair.png", 0, 0)
     love.mouse.setCursor(cursor)
@@ -60,7 +64,7 @@ function love.draw()
         -- fixme: no menu yet!
     end
 
-    if game.state == "ingame" then
+    if game.state == "ingame" or game.state == "dead" then
         map:draw()
         player:draw()
         bullets:draw()
@@ -69,16 +73,17 @@ function love.draw()
 
     -- always display HUD
     hud:draw()
+    score:draw()
 end
 
 function love.update(dt)
     if game.state == "ingame" then
-        if player.dead == false then
-            map:update()
-            player:update(dt)
-            bullets:update(dt)
-            enemies:update(dt)
-        end
+        map:update()
+        player:update(dt)
+        bullets:update(dt)
+        enemies:update(dt)
+    end
+    if game.state == "dead" then
     end
 end
 

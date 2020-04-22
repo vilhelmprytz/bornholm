@@ -51,6 +51,7 @@ function enemies:update(dt)
         -- if player has collided with enemy then the player has died
         if CheckCollision(enemy.x,enemy.y,enemies.width,enemies.height, player.x,player.y,player.width,player.height) then
             player.dead = true
+            game.state = "dead"
         end
 
         -- update x and y using the velocity
