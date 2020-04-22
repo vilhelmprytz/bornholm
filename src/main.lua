@@ -85,6 +85,12 @@ function love.update(dt)
     end
     if game.state == "dead" then
     end
+    if player.newHighscore == false then
+        -- save and submit new highscore
+        saveHighscore(score.score, currentHighscore)
+        -- read new highscore
+        currentHighscore = readHighscore()
+    end
 end
 
 -- keypressed
