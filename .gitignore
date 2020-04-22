@@ -1,2 +1,6 @@
 # highscore
 .bornholm_highscore.txt
+
+# .love (LOVE2D compiled)
+*.love
+dist
