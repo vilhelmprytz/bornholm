@@ -20,7 +20,7 @@ love bornholm.love
 
 Use `A` and `D` to move left or right. Use spacebar to jump and aim with your mouse. The objective is to survive as long as possible to get a high score. Each time you shoot a "ghost" your score increases by one. If a ghost manages to touch the player, the game is over.
 
-Use escape to exit the game completely.
+Use escape to exit the game completely. Press Enter (Return) to restart game when dead.
 
 ## Requirements for development
 

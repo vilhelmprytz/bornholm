@@ -39,6 +39,7 @@ function score:draw()
         love.graphics.printf("YOU DIED", (screen_width/2)-300, screen_height/3, 500, 'center')
         love.graphics.printf("Score: " ..score.score, (screen_width/2)-300, (screen_height/3)+50, 500,  'center')
         love.graphics.printf("Highscore: " ..tostring(currentHighscore), (screen_width/2)-300, (screen_height/3)+100, 500,  'center')
+        love.graphics.printf("Press Enter (Return) to restart game", (screen_width/2)-300, (screen_height/3)+150, 500,  'center')
     end
   
     love.graphics.setFont(default)

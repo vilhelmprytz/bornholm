@@ -93,6 +93,17 @@ function love.update(dt)
             -- read new highscore
             score.current_highscore = score:read_high_score()
         end
+        -- restart
+        if love.keyboard.isDown('return') then
+            -- reset
+            player.dead = false
+            game.state = "ingame"
+            score.score = 0
+            player.x = 500
+            player.y = 500
+            player.horizontal_velocity = 0
+            player.vertical_velocity = 0 
+        end
     end
 end
 
