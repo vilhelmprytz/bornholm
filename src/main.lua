@@ -54,7 +54,7 @@ function love.load()
     score:load()
 
     -- set special cursor
-    cursor = love.mouse.newCursor("src/cursor/crosshair.png", 0, 0)
+    cursor = love.mouse.newCursor("src/cursor/crosshair.png", 12, 12)
     love.mouse.setCursor(cursor)
 end
 
