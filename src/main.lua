@@ -103,6 +103,8 @@ function love.update(dt)
             player.y = 500
             player.horizontal_velocity = 0
             player.vertical_velocity = 0 
+            bullet_objects = {}
+            enemy_objects = {}
         end
     end
 end
