@@ -35,6 +35,9 @@ game.map.raw = MAP
 function love.load()
     print("Running Bornholm version " .. version)
 
+    -- seed math random
+    math.randomseed(os.time())
+
     -- load the PNG files
     tiles = load_tiles()
 

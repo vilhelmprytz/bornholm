@@ -20,12 +20,49 @@ function enemies:load()
 end
 
 function enemies:spawn()
-    enemy_test = {}
-    enemy_test.x = 300
-    enemy_test.y = 200
-    enemy_test.horizontal_velocity = 0
-    enemy_test.vertical_velocity = 0
-    table.insert( enemy_objects, enemy_test )
+    new_enemy = {}
+
+    -- velocity for enemies always start on 0
+    new_enemy.horizontal_velocity = 0
+    new_enemy.vertical_velocity = 0
+
+    -- 1 is up, 2 is down, 3 is left and 4 is right
+    local orientation = math.random(4)
+
+    local safety_height = love.graphics.getHeight()/2 + 20
+    local safety_width = love.graphics.getWidth()/2 + 20
+
+    -- fixme: this is hardcoded, boundaries of where enemies are allowed to spawn
+    local max_x = 5500
+    local max_y = 1500
+    local min_x = -800
+    local min_y = -800
+
+    -- up
+    if orientation == 1 then
+        new_enemy.x = math.random(min_x, max_x)
+        new_enemy.y = math.random(min_y, player.y-safety_height)
+    end
+
+    -- down
+    if orientation == 2 then
+        new_enemy.x = math.random(min_x, max_x)
+        new_enemy.y = math.random(player.y+safety_height, max_y)
+    end
+
+    -- left
+    if orientation == 3 then
+        new_enemy.x = math.random(min_x, player.x-safety_width)
+        new_enemy.y = math.random(min_y, max_y)
+    end
+
+    -- right
+    if orientation == 4 then
+        new_enemy.x = math.random(player.x+safety_width, max_x)
+        new_enemy.y = math.random(min_y, max_y)
+    end
+
+    table.insert( enemy_objects, new_enemy )
 end
 
 local function tablelength(T)

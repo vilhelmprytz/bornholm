@@ -7,7 +7,7 @@ clean:
 	rm -rf bornholm.love
 
 build:
-	zip -qq -9 -r bornholm.love .
+	zip -qq -9 -r bornholm.love . -x ".*"
 
 windows:
 	mkdir dist
@@ -26,6 +26,7 @@ windows:
 	cp win64/mpg123.dll dist/mpg123.dll
 	cp win64/msvcp120.dll dist/msvcp120.dll
 	cp win64/msvcr120.dll dist/msvcr120.dll
+	cp CHANGELOG.md dist/CHANGELOG.txt
 
 	cd dist && zip -r bornholm_windows.zip . && cd ..
 
