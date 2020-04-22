@@ -4,10 +4,28 @@
 
 The Operation Bornholm game.
 
-## Requirements
+## Getting started
+
+If you are on Windows, you can download the pre-built Windows executable from the latest release [here](https://github.com/VilhelmPrytz/bornholm/releases). Just click the downloaded `.zip` and run `bornholm.exe`.
+
+If you are on Linux, you need to have [LOVE2D](https://love2d.org) installed since we don't provide Linux binaries. You can then download `bornholm.love` from the GitHub release page [here](https://github.com/VilhelmPrytz/bornholm/releases).
+
+To run it from Linux:
+
+```bash
+love bornholm.love
+```
+
+## Controls and game objective
+
+Use `A` and `D` to move left or right. Use spacebar to jump and aim with your mouse. The objective is to survive as long as possible to get a high score. Each time you shoot a "ghost" your score increases by one. If a ghost manages to touch the player, the game is over.
+
+Use escape to exit the game completely.
+
+## Requirements for development
 
 * [LOVE2D](https://love2d.org) (version 11.3)
-* `love` command in your path
+* `love` command in your path (instructions on how to add this available on the official LÖVE website)
 
 ## Running locally
 
