@@ -72,7 +72,7 @@ local function tablelength(T)
 end
 
 function enemies:update(dt)
-    enemies.amount = math.floor(score.score/10) + 1
+    enemies.amount = math.floor(score.score/10) + 3
 
     -- if the amount of enemies present are less than the amount supposed to be present, spawn new
     while tablelength(enemy_objects) < enemies.amount do

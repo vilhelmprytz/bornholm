@@ -11,7 +11,7 @@ bullets = {}
 
 function bullets:load()
     bullets.default_velocity = 500
-    bullets.default_cooldown = 0.5
+    bullets.default_cooldown = 0.3
     bullets.width = 8
     bullets.height = 8
 
