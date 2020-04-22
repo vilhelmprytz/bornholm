@@ -35,13 +35,24 @@ Start the repo from within the code.
 love .
 ```
 
+## Compiling Windows binary and `.love` executable
+
+Requires Linux, `zip`, `unzip` and `wget`. You can create a `.love` for Linux and `.zip` with Windows binary using make. To build, simply run it.
+
+```bash
+make
+```
+
+The Windows binary will be available at `dist/bornholm_windows.zip` and the `.love` file will be available at `bornholm.love`.
+
 ## Structure
 
-To be documented (this is constantly changing during development)!
+General structure of code.
 
 * `src/main.lua` - main LOVE2D file
 * `src/tiles` - textures for tiles
 * `src/maps` - map data structures
+* `src/ui` - contains methods related to the UI and HUD
 * `src/objects` - methods (objects) for each element of the game
   * `src/objects/bullets.lua` - handles bullets (collision, draw, create, delete)
   * `src/objects/enemies.lua` - handles enemies (collision, draw, create, delete)
