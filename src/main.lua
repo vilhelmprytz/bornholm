@@ -35,6 +35,9 @@ game.map.raw = MAP
 function love.load()
     print("Running Bornholm version " .. version)
 
+    -- seed math random
+    math.randomseed(os.time())
+
     -- load the PNG files
     tiles = load_tiles()
 
@@ -84,12 +87,25 @@ function love.update(dt)
         enemies:update(dt)
     end
     if game.state == "dead" then
-    end
-    if player.newHighscore == false then
-        -- save and submit new highscore
-        saveHighscore(score.score, currentHighscore)
-        -- read new highscore
-        currentHighscore = readHighscore()
+        if score.new_highscore == false then
+            -- save and submit new highscore
+            score:save_high_score(score.score, score.current_highscore)
+            -- read new highscore
+            score.current_highscore = score:read_high_score()
+        end
+        -- restart
+        if love.keyboard.isDown('return') then
+            -- reset
+            player.dead = false
+            game.state = "ingame"
+            score.score = 0
+            player.x = 500
+            player.y = 500
+            player.horizontal_velocity = 0
+            player.vertical_velocity = 0 
+            bullet_objects = {}
+            enemy_objects = {}
+        end
     end
 end
 

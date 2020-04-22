@@ -8,59 +8,24 @@
 require "src/version"
 
 score = {}
-highscoreSave = "bornholm_highscore.txt"
+highscore_filename = ".bornholm_highscore.txt"
+
+-- check if highscore file exists
+function file_exists(name)
+  local f=io.open(name,"r")
+  if f~=nil then io.close(f) return true else return false end
+end
 
 function score:load()
     score.score = 0
-    currentHighscore = readHighscore()
+    score.new_highscore = false
+    score.current_highscore = score:read_high_score()
 
     default = love.graphics.newFont(12)
     popupfont = love.graphics.newFont(30)
 end
 
--- check if highscore file exists
-function file_exists(name)
-    local f=io.open(name,"r")
-    if f~=nil then io.close(f) return true else return false end
- end
-
- -- read highscore
-function readHighscore()
-    if file_exists(highscoreSave) then
-      file = io.open (highscoreSave, "r")
-  
-      io.input(file)
-      currentHighscore = io.read()
-      io.close(file)
-    else
-      file = io.open(highscoreSave, "w")
-  
-      io.output(file)
-      io.write("0")
-      io.close()
-  
-      currentHighscore = 0
-    end
-    return currentHighscore
-  end
- 
-  -- write new highscore
- function writeHighscore(number)
-   file = io.open(highscoreSave, "w")
- 
-   io.output(file)
-   io.write(number)
-   io.close()
- end
-
- -- save highscore
- function saveHighscore(score, savedHighscore)
-    if tonumber(score) > tonumber(savedHighscore) then
-      writeHighscore(score)
-    end
-  end
-
-  -- draw score, highscore and if player is dead
+-- draw score, highscore and if player is dead
 function score:draw()
     local screen_width = love.graphics.getWidth()
     local screen_height = love.graphics.getHeight()
@@ -73,10 +38,46 @@ function score:draw()
         love.graphics.setFont(popupfont)
         love.graphics.printf("YOU DIED", (screen_width/2)-300, screen_height/3, 500, 'center')
         love.graphics.printf("Score: " ..score.score, (screen_width/2)-300, (screen_height/3)+50, 500,  'center')
-        love. graphics.printf("Highscore: " ..tostring(currentHighscore), (screen_width/2)-300, (screen_height/3)+100, 500,  'center')
+        love.graphics.printf("Highscore: " ..tostring(currentHighscore), (screen_width/2)-300, (screen_height/3)+100, 500,  'center')
+        love.graphics.printf("Press Enter (Return) to restart game", (screen_width/2)-300, (screen_height/3)+150, 500,  'center')
     end
+  
     love.graphics.setFont(default)
     love.graphics.setColor(255,255,255)
 end
 
-player.newHighscore = false
+ -- read highscore
+ function score:read_high_score()
+  if file_exists(highscore_filename) then
+    file = io.open (highscore_filename, "r")
+
+    io.input(file)
+    currentHighscore = io.read()
+    io.close(file)
+  else
+    file = io.open(highscore_filename, "w")
+
+    io.output(file)
+    io.write("0")
+    io.close()
+
+    currentHighscore = 0
+  end
+  return currentHighscore
+end
+
+-- write new highscore
+function score:write_high_score(number)
+ file = io.open(highscore_filename, "w")
+
+ io.output(file)
+ io.write(number)
+ io.close()
+end
+
+-- save highscore
+function score:save_high_score(new_score, savedHighscore)
+  if tonumber(new_score) > tonumber(savedHighscore) then
+    score:write_high_score(new_score)
+  end
+end
