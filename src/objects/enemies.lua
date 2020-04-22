@@ -14,10 +14,12 @@ function enemies:load()
     enemies.height = 32
     enemies.movement_speed = 150
 
-    enemies.amount = 0
+    enemies.amount = 1
 
     enemy_objects = {}
+end
 
+function enemies:spawn()
     enemy_test = {}
     enemy_test.x = 300
     enemy_test.y = 200
@@ -26,7 +28,20 @@ function enemies:load()
     table.insert( enemy_objects, enemy_test )
 end
 
+local function tablelength(T)
+    local count = 0
+    for _ in pairs(T) do count = count + 1 end
+    return count
+end
+
 function enemies:update(dt)
+    enemies.amount = math.floor(score.score/10) + 1
+
+    -- if the amount of enemies present are less than the amount supposed to be present, spawn new
+    while tablelength(enemy_objects) < enemies.amount do
+        enemies:spawn()
+    end
+
     for i,enemy in ipairs(enemy_objects) do
         -- decide direction of velocity
         if enemy.x - player.x > 0 then
