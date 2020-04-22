@@ -31,8 +31,8 @@ function score:draw()
     local screen_height = love.graphics.getHeight()
 
     love.graphics.setColor(200, 100, 0)
-    love.graphics.print("Score: " .. score.score, 10, 220)
-    love.graphics.print("Your highscore: " .. tostring(currentHighscore), 10, 240 )
+    love.graphics.print("Score: " .. score.score, 10, 40)
+    love.graphics.print("Your highscore: " .. tostring(currentHighscore), 10, 55 )
 
     if player.dead then
         love.graphics.setFont(popupfont)
