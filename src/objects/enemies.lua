@@ -28,11 +28,6 @@ end
 
 function enemies:update(dt)
     for i,enemy in ipairs(enemy_objects) do
-        -- fixme: this is hard coded to check if bullets travel outside (bad)
-        if enemy.y < -800 or enemy.y > 2000 or enemy.x < -800 or enemy.x > 8000 then
-            table.remove(enemy_objects, i)
-        end
-
         -- decide direction of velocity
         if enemy.x - player.x > 0 then
             enemy.horizontal_velocity = -enemies.movement_speed
@@ -53,6 +48,21 @@ function enemies:update(dt)
             player.dead = true
             game.state = "dead"
         end
+
+        -- fixme: this is hard coded to check if bullets travel outside (bad)
+        if enemy.y < -800 or enemy.y > 2000 or enemy.x < -800 or enemy.x > 8000 then
+            table.remove(enemy_objects, i)
+        end
+
+        -- check if bullets
+        for n,bullet in ipairs(bullet_objects) do
+            if CheckCollision(bullet.x,bullet.y,bullets.width,bullets.height, enemy.x,enemy.y,enemies.width,enemies.height) then
+                table.remove(bullet_objects, n)
+                table.remove(enemy_objects, i)
+                score.score = score.score + 1
+            end
+        end
+
 
         -- update x and y using the velocity
         enemy.x = enemy.x+enemy.horizontal_velocity*dt
