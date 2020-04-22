@@ -84,12 +84,12 @@ function love.update(dt)
         enemies:update(dt)
     end
     if game.state == "dead" then
-    end
-    if player.newHighscore == false then
-        -- save and submit new highscore
-        saveHighscore(score.score, currentHighscore)
-        -- read new highscore
-        currentHighscore = readHighscore()
+        if score.new_highscore == false then
+            -- save and submit new highscore
+            score:save_high_score(score.score, score.current_highscore)
+            -- read new highscore
+            score.current_highscore = score:read_high_score()
+        end
     end
 end
 
